@@ -14,7 +14,7 @@ jobs:
             'echo testing all examples in /examples against test suite in /test'     
       - run:
           name: Deploy Mock APP for Regstration BB API and PyTest Containers
-          command: cd mock && docker-compose up --build -d
+          command: cd examples/mock && docker-compose up --build -d
       - run:
           name: Check Status of Mock App and API-Testing Containers
           command: docker ps
