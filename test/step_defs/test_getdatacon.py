@@ -3,31 +3,7 @@ import json
 import requests
 import sys
 from pytest_bdd import scenarios, given, when, then, parsers
-#from selenium import webdriver
-#from selenium.webdriver.common.keys import Keys
-
-#from selenium import webdriver
-#from webdriver_manager.chrome import ChromeDriverManager
-
-#from selenium.webdriver.chrome.options import Options
-#from selenium.webdriver.common.by import By
-#options = Options()
-
-#options.headless = True
-
-#driver = webdriver.Chrome("/usr/bin/chromedriver", options=chrome_options)
-
-
-#driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
-
-
-
-#driver = webdriver.Chrome()
-
-
- 
 # Constants
- 
 #API_HOME = 'http://172.16.51.57:8000/home/'
 API_HOME = 'http://myapi:3000/api/v1/data/con/1.0'
  
