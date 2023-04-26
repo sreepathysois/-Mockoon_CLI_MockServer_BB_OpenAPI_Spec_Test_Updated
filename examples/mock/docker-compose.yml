@@ -3,7 +3,7 @@ services:
   mockoon:
     image: mockoon/cli:latest
     entrypoint: ["mockoon-cli"]
-    command: ["--data", "/data", "port", "3000"]
+    command: ["-", "data", "port", "3000"]
     container_name: myapi
     ports:
       - "3000:3000"
