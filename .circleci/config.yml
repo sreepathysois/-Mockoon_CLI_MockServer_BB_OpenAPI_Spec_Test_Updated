@@ -1,44 +1,24 @@
 version: 2.1
 
-
-jobs:  
-  deployment-and-api-tests:    
-    build: # name of your job
-    machine: # executor type
-      image: ubuntu-2004:202010-01
-    steps:   
-      - checkout  
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+      - image: docker:20.10.9
+    steps:
+      - checkout
+      - run: npm install
       - run:
-          name: 'Intro'
-          command:
-            'echo testing all examples in /examples against test suite in /test'     
+          name: Start Mockoon server
+          command: |
+            docker-compose up -d
+            sleep 5
       - run:
-          name: Deploy Mock APP for Regstration BB API and PyTest Containers
-          command: cd examples/mock && docker-compose up --build -d
+          name: Run tests against Mockoon server
+          command: docker ps 
       - run:
-          name: Check Status of Mock App and API-Testing Containers
-          command: docker ps
+          name: Run tests against Mockoon server
+          command: docker logs myapi
       - run:
-          name: Testing Api
-          command: 'echo testing using conatainers' 
-      - run:
-          name: Check Status of Testing Containers are Deployed 
-          command: docker ps
-      - run:
-          name: Check Status of Testing Containers are Deployed 
-          command: docker logs myapi 
-      - run:
-          name: Run cucumber tests against Register BB Mock 
-          command: docker  exec -i pytest  pytest 
-                
-                
-
-    
-workflows:  
-  deployment-and-api-tests:    
-    jobs:      
-      - deployment-and-api-tests:
-          filters:            
-            branches:
-              only:
-                - main
+          name: Run tests against Mockoon server
+          command: docker exec -it pytest curl -X GET http://myapi:3000/event/list_details
