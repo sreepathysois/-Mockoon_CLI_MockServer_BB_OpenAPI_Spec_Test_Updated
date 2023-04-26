@@ -1,4 +1,4 @@
 FROM mockoon/cli:latest 
-COPY test-api.yaml /data/test-api.yaml 
+COPY reg-bb-api.json /data/reg-bb-api.json 
 EXPOSE 3000 
 ENTRYPOINT ["mockoon-cli", "start", "--data data","--hostname", "0.0.0.0", "--daemon-off"]
