@@ -2,4 +2,4 @@ FROM mockoon/cli:latest
 
 
 
-ENTRYPOINT ["mockoon-cli", "start"]
+ENTRYPOINT ["mockoon-cli", "-d /data", "start"]
