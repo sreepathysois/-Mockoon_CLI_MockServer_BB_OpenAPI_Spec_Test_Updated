@@ -4,6 +4,7 @@ services:
     build:
      context: .
     container_name: myapi
+    command: mockoon-cli start  --data data
     ports:
       - "3000:3000"
     networks:
