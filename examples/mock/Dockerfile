@@ -1,3 +1,3 @@
 FROM mockoon/cli:latest 
 EXPOSE 3000 
-ENTRYPOINT ["mockoon-cli", "start", "--data data"]
+ENTRYPOINT ["mockoon-cli", "start"]
