@@ -1,25 +1,46 @@
 version: 2.1
 
-jobs:
-  build:
-    machine:
-      image: ubuntu-20.04
-    steps:
-      - checkout
-      - run: |
-          sudo apt-get update
-          sudo apt-get install -y curl
-          curl -fsSL https://get.docker.com -o get-docker.sh
-          sudo sh get-docker.sh
-          sudo usermod -aG docker $USER
-          sudo systemctl start docker
-      - run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
-      - run: |
-          docker-compose --version
+
+jobs:  
+  deployment-and-api-tests:    
+    build: # name of your job
+    machine: # executor type
+      image: ubuntu-2004:202010-01
+    steps:   
+      - checkout  
       - run:
-          name: Start Mockoon server
-          command: |
-            cd examples/moc && docker-compose up -d
-            sleep 5
+          name: 'Test Scheduler Build Block API'
+          command:
+            'echo testing all examples in /examples against test suite in /test'     
+      - run:
+          name: Deploy Mock APP for Scheduler BB API and PyTest Containers
+          command: cd examples/mock && docker-compose up --build -d
+      - run:
+          name: Check Status of Mock App and API Testing Containers
+          command: docker ps
+      - run:
+          name: Testing Scheduler BB API 
+          command: 'echo testing using conatainers' 
+      - run:
+          name: Check Status of Testing Containers are Deployed 
+          command: docker ps
+      - run:
+          name: Testing Scheduler BB API 
+          command: 'echo testing using conatainers' 
+      
+      - run:
+          name: Run cucumber tests against Register BB Mock 
+          command: docker  exec -i pytest  curl -X GET http://myapi:3000/event/list_details
+                
+      - store_test_results:  
+          path: ../test_result
+
+    
+workflows:  
+  deployment-and-api-tests:    
+    jobs:      
+      - deployment-and-api-tests:
+          filters:            
+            branches:
+              only:
+                - main
