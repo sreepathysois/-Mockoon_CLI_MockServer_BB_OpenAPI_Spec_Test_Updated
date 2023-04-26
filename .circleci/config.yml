@@ -25,6 +25,9 @@ jobs:
           name: Check Status of Testing Containers are Deployed 
           command: docker ps
       - run:
+          name: Check Status of Testing Containers are Deployed 
+          command: docker ps
+      - run:
           name: Run cucumber tests against Register BB Mock 
           command: docker  exec -i pytest  pytest 
                 
