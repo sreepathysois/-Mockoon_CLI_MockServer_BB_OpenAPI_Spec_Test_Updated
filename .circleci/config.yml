@@ -8,9 +8,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Start Mockoon server
-          command: |
-            cd examples/mock && docker-compose up -d
+          name: Deploy Mock APP for Scheduler BB API and PyTest Containers
+          command: cd examples/mock && docker-compose up --build -d
             sleep 5
       - run:
           name: Run tests against Mockoon server
