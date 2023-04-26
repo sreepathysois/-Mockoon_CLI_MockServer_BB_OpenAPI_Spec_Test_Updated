@@ -2,7 +2,7 @@ version: "3"
 services:
   mockoon:
     image: mockoon/cli:latest
-    command: mockoon-cli -d /data
+    command: -d /data
     container_name: myapi
     ports:
       - "3000:3000"
