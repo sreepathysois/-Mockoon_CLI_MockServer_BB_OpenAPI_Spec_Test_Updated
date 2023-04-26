@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Start Mockoon server
           command: |
-            docker-compose up -d
+            cd examples/mock && docker-compose up -d
             sleep 5
       - run:
           name: Run tests against Mockoon server
